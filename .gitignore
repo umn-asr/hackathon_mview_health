@@ -1,0 +1,12 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/spec/support/database.yml
+/tmp/
+*.gem
+spec/examples.txt
+Gemfile.lock
