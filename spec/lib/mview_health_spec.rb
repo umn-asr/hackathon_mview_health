@@ -42,6 +42,22 @@ RSpec.describe MviewHealth::HealthCheck do
         end
       end
     end
+
+    context "a configuration has been set" do
+      let(:existing_config) { Object.new }
+
+      before do
+        MviewHealth.instance_variable_set(:@config, existing_config)
+      end
+
+      after do
+        MviewHealth.instance_variable_set(:@config, nil)
+      end
+
+      it "returns an existing configuration" do
+        expect(MviewHealth.config).to eq(existing_config)
+      end
+    end
   end
 
   describe "#ok?" do
