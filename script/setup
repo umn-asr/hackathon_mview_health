@@ -8,3 +8,11 @@ set -e
 cd "$(dirname "$0")/.."
 
 script/bootstrap
+
+echo "*************************************************"
+echo "While this app sets up, review the README.md file and update anything that's incorrect"
+echo "https://github.umn.edu/asrweb/knowledgebucket/blob/master/best_practices/readmes.md"
+echo "*************************************************"
+
+echo "===> Getting passwords from LastPass if available"
+[ -f ./bin/lastpassify ] && [ -f ./spec/support/database.example.yml ] && ./bin/lastpassify ./spec/support/database.example.yml ./spec/support/database.yml
