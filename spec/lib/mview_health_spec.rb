@@ -2,7 +2,7 @@ require "ostruct"
 require_relative "../../lib/mview_health"
 # require_relative "../../lib/mview_metadata"
 
-RSpec.describe MviewHealth do
+RSpec.describe MviewHealth::HealthCheck do
   let(:mview_metadata) { OpenStruct.new(name: "repeated_courses") }
 
   describe "#ok?" do

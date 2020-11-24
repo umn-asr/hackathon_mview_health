@@ -1,3 +1,3 @@
-class MviewHealth
+module MviewHealth
   VERSION = "0.1.0"
 end
