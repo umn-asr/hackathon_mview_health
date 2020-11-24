@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../../lib/models/config"
+require_relative "../../lib/mview_health/models/config"
 
 RSpec.describe MviewHealth::Config do
   describe ".build_with_rails_defaults" do
