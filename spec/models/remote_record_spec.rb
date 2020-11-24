@@ -44,5 +44,14 @@ RSpec.describe MviewHealth::RemoteRecord do
         end
       end
     end
+
+    context "when the concrete implementation does not set a view_name" do
+      # test class that raises an error
+      class InvalidRemoteRecord < MviewHealth::RemoteRecord; end
+
+      it "raises an error" do
+        expect { InvalidRemoteRecord.table_name }.to raise_error(MviewHealth::RemoteRecord::NoViewName, "RemoteRecord classes must set their view_name")
+      end
+    end
   end
 end
