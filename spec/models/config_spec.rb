@@ -16,5 +16,12 @@ RSpec.describe MviewHealth::Config do
       expect(described_class.build.env).to eq("test_env")
       ENV["ENV"] = original_setting
     end
+
+    it "sets database_file to the DATABASE_FILE environment variable" do
+      old_setting = ENV.delete("DATABASE_FILE")
+      ENV["DATABASE_FILE"] = "test/path/for/database.yml"
+      expect(described_class.build.database_file).to eq("test/path/for/database.yml")
+      ENV["DATABASE_FILE"] = old_setting
+    end
   end
 end

@@ -7,5 +7,9 @@ module MviewHealth
     def env
       ENV["ENV"]
     end
+
+    def database_file
+      ENV["DATABASE_FILE"]
+    end
   end
 end
