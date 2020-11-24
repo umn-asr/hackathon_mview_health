@@ -1,7 +1,9 @@
+require_relative "./models/mview_metadata"
+
 module MviewHealth
   # This class checks that an Oracle mview has updated recently
   class HealthCheck
-    def initialize(unusable_mviews:, out_of_date_mviews:)
+    def initialize(unusable_mviews: MviewMetadata.unusable, out_of_date_mviews: MviewMetadata.last_refreshed_before(Time.now.yesterday))
       self.unusable_mviews = unusable_mviews
       self.out_of_date_mviews = out_of_date_mviews
     end

@@ -133,4 +133,12 @@ RSpec.describe MviewHealth::HealthCheck do
       end
     end
   end
+
+  describe "default attributes" do
+    it "uses MviewMetadata scopes for its default attributes" do
+      expect(MviewHealth::MviewMetadata).to receive(:unusable).and_return([])
+
+      described_class.new
+    end
+  end
 end
