@@ -2,6 +2,35 @@ require "spec_helper"
 require_relative "../../lib/models/config"
 
 RSpec.describe MviewHealth::Config do
+  describe ".build_with_rails_defaults" do
+    before do
+      # stub using Rails
+      module Rails
+        def self.env
+          "config_test"
+        end
+
+        def self.root
+          File.expand_path(__dir__)
+        end
+      end
+    end
+
+    after do
+      Object.send(:remove_const, :Rails)
+    end
+
+    it "sets the env to Rails.env" do
+      subject = described_class.build_with_rails_defaults
+      expect(subject.env).to eq("config_test")
+    end
+
+    it "sets the database_file to Rails root + config + database.yml" do
+      subject = described_class.build_with_rails_defaults
+      expect(subject.database_file).to eq(File.join(File.expand_path(__dir__), "config", "database.yml"))
+    end
+  end
+
   describe ".build" do
     it "returns a new config" do
       new_config = instance_double(described_class)
