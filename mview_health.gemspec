@@ -38,6 +38,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "activerecord", "~> 5.2"
   spec.add_runtime_dependency "activerecord-oracle_enhanced-adapter", "~> 5.2.8"
+  spec.add_runtime_dependency "view_builder"
 
   spec.add_runtime_dependency "ruby-oci8", "~> 2.2"
 end
