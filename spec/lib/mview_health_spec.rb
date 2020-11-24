@@ -135,6 +135,15 @@ RSpec.describe MviewHealth::HealthCheck do
   end
 
   describe "default attributes" do
+    before do
+      # stub using Rails
+      module Rails
+        def self.configuration
+          OpenStruct.new(read_only_peoplesoft: true)
+        end
+      end
+    end
+
     it "uses MviewMetadata scopes for its default attributes" do
       expect(MviewHealth::MviewMetadata).to receive(:unusable).and_return([])
 
