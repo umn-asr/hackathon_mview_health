@@ -11,6 +11,8 @@ RSpec.describe MviewHealth::HealthCheck do
         before do
           # stub using rails
           module Rails; end
+          # make sure doubles don't leak between tests
+          MviewHealth.instance_variable_set(:@config, nil)
         end
 
         after do
@@ -28,6 +30,8 @@ RSpec.describe MviewHealth::HealthCheck do
       context "the application is not a Rails project" do
         before do
           expect(Object.const_defined?(:Rails)).to be false
+          # make sure doubles don't leak between tests
+          MviewHealth.instance_variable_set(:@config, nil)
         end
 
         it "builds an empty configuration" do
