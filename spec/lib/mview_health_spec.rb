@@ -60,6 +60,12 @@ RSpec.describe MviewHealth::HealthCheck do
     end
   end
 
+  describe ".configure" do
+    it "yields the config to the block to be altered" do
+      expect { |config| MviewHealth.configure(&config) }.to yield_with_args(MviewHealth.config)
+    end
+  end
+
   describe "#ok?" do
     it "is false when there is 1 or more unusuable mviews" do
       subject = described_class.new(

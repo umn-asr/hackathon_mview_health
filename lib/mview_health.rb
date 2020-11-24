@@ -7,6 +7,10 @@ module MviewHealth
                   Config.build
                 end
   end
+
+  def self.configure
+    yield self.config
+  end
 end
 
 Dir.glob(File.join(File.dirname(__FILE__), "mview_health", "**", "*.rb")) { |file| require file }
