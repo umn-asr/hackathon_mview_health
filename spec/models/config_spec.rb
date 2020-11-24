@@ -9,5 +9,12 @@ RSpec.describe MviewHealth::Config do
       expect(described_class.build).to eq(new_config)
       expect(described_class).to have_received(:new).with(no_args)
     end
+
+    it "sets env to the ENV environment variable" do
+      original_setting = ENV.delete("ENV")
+      ENV["ENV"] = "test_env"
+      expect(described_class.build.env).to eq("test_env")
+      ENV["ENV"] = original_setting
+    end
   end
 end
