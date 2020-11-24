@@ -5,6 +5,41 @@ require_relative "../../lib/mview_health"
 RSpec.describe MviewHealth::HealthCheck do
   let(:mview_metadata) { OpenStruct.new(name: "repeated_courses") }
 
+  describe ".config" do
+    context "when the configuration has not been set" do
+      context "this is a Rails project" do
+        before do
+          # stub using rails
+          module Rails; end
+        end
+
+        after do
+          Object.send(:remove_const, :Rails)
+        end
+
+        it "builds a new configuration with rails defaults when rails is defined" do
+          expected_config = instance_double(MviewHealth::Config)
+          allow(MviewHealth::Config).to receive(:build_with_rails_defaults).and_return(expected_config)
+          expect(MviewHealth.config).to eq(expected_config)
+          expect(MviewHealth::Config).to have_received(:build_with_rails_defaults)
+        end
+      end
+
+      context "the application is not a Rails project" do
+        before do
+          expect(Object.const_defined?(:Rails)).to be false
+        end
+
+        it "builds an empty configuration" do
+          expected_config = instance_double(MviewHealth::Config)
+          allow(MviewHealth::Config).to receive(:build).and_return(expected_config)
+          expect(MviewHealth.config).to eq(expected_config)
+          expect(MviewHealth::Config).to have_received(:build)
+        end
+      end
+    end
+  end
+
   describe "#ok?" do
     it "is false when there is 1 or more unusuable mviews" do
       subject = described_class.new(
