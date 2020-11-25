@@ -148,6 +148,9 @@ RSpec.describe MviewHealth::HealthCheck do
     it "uses MviewMetadata scopes for its default attributes" do
       expect(MviewHealth::MviewMetadata).to receive(:unusable).and_return([])
 
+      # TODO we need freeze time for this to work, which is part of rails_rspec
+      # expect(MviewHealth::MviewMetadata).to receive(:last_refreshed_before).with(Time.now.yesterday).and_return([])
+
       described_class.new
     end
   end
