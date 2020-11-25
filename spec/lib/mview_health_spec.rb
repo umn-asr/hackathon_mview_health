@@ -1,4 +1,5 @@
 require "ostruct"
+require "support/db_helper"
 require_relative "../../lib/mview_health"
 # require_relative "../../lib/mview_metadata"
 
